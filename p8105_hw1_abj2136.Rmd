@@ -41,7 +41,7 @@ penguin_df = tibble (
   norm_samp = rnorm(10),
   greater_than_zero = norm_samp > 0,
   char_vec = letters[1:10],
-  factor_vec = factor(sample(c(1,2,3), 10, replace = TRUE))
+  factor_vec = factor(sample(c(2,4,6), 10, replace = TRUE))
 )
 
 ```
@@ -61,3 +61,12 @@ It is possible to calculate the mean of the random sample (norm_samp) and the lo
 
 It is not possible to calculate the mean of the character vector (char_vec) because this is stored as a character without a numeric value. Similarly, even though the factor vector (factor_vec) uses numbers as the levels, these are treated as distinct categorical labels, not numberic values, so a mean can not be calculated. That is why warning messages appear for these two lines of code stating that the arguments are not numeric or logical.   
 
+### Converting to numeric values
+```{r q2_convert_to_numeric, results = 'hide'}
+
+penguin_df |> pull(greater_than_zero) |> as.numeric()
+penguin_df |> pull(char_vec) |> as.numeric()
+penguin_df |> pull(factor_vec) |> as.numeric()
+
+```
+The logical vector is converted to a series of 1's and 0's, the numeric values for TRUE and FALSE. The character vector is turned into a series of NA's, which causes a warning because character strings can not be converted into numbers, they do not have set numeric values (I kept the warning in to show this). The factor vector is converted into numbers based on the rank of each inputted value's level, but not based on the actual numeric value, which is why the level values (1,2,3) differ from the values entered into the factor vector (2,4,6).  
