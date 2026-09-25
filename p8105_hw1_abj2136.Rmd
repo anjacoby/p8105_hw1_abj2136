@@ -22,7 +22,7 @@ The `penguins` dataset contains `r nrow(penguins)` observations and `r ncol(peng
 The mean flipper length among the penguins in this data set is `r round(mean(penguins$flipper_length_mm, na.rm = TRUE, 2))` mm. 
 
 ### Making plots:
-```{r scatterplot, message = FALSE, warning = FALSE}
+```{r penguin_scatterplot, message = FALSE, warning = FALSE}
 ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm, color = species)) + geom_point()
 
 ggsave("penguin_q1_scatterplot.png")
@@ -31,10 +31,12 @@ ggsave("penguin_q1_scatterplot.png")
 
 ### Creating dataframes:
 
-```{r}
+```{r q2_dataframe, message = FALSE}
 
+# setting seed for random sample
 set.seed(1)
 
+#creating dataframe
 penguin_df = tibble (
   norm_samp = rnorm(10),
   greater_than_zero = norm_samp > 0,
@@ -42,9 +44,20 @@ penguin_df = tibble (
   factor_vec = factor(sample(c(1,2,3), 10, replace = TRUE))
 )
 
+```
 
+### Attempting to calculate means:
+
+```{r q2_means}
+
+penguin_df |> pull(norm_samp) |>  mean()
+penguin_df |> pull(greater_than_zero) |> mean()
+penguin_df |> pull(char_vec) |> mean()
+penguin_df |> pull(factor_vec) |> mean()
 
 ```
 
+It is possible to calculate the mean of the random sample (norm_samp) and the logical vector (greater_than_zero) because these are stored as numeric. The random sample contains 10 random numbers that can be averaged, and the logical vector contains a series TRUE or FALSE that is converted to 1's and 0's that can be averaged. 
 
+It is not possible to calculate the mean of the character vector (char_vec) because this is stored as a character without a numeric value. Similarly, even though the factor vector (factor_vec) uses numbers as the levels, these are treated as distinct categorical labels, not numberic values, so a mean can not be calculated. That is why warning messages appear for these two lines of code stating that the arguments are not numeric or logical.   
 
