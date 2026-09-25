@@ -27,5 +27,24 @@ ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm, color = species)
 
 ggsave("penguin_q1_scatterplot.png")
 ```
+# Problem 2
+
+### Creating dataframes:
+
+```{r}
+
+set.seed(1)
+
+penguin_df = tibble (
+  norm_samp = rnorm(10),
+  greater_than_zero = norm_samp > 0,
+  char_vec = letters[1:10],
+  factor_vec = factor(sample(c(1,2,3), 10, replace = TRUE))
+)
+
+
+
+```
+
 
 
