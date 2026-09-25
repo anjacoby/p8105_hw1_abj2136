@@ -1,0 +1,26 @@
+Anya Jacoby
+---
+title: "p8105_hw1_abj2136"
+output: github_document
+date: "2026-09-25"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Problem 1
+
+### Loading packages and data set for the problem:
+```{r packagesm, message = FALSE}
+library(tidyverse)
+data("penguins", package = "palmerpenguins")
+```
+
+The `penguins` dataset contains `r nrow(penguins)` observations and `r ncol(penguins)` variables, including `r (names(penguins))`. The data set includes penguins from three islands (`r unique(penguins$island)`) and three unique species (`r unique(penguins$species)`). The data was collected from `r min(penguins$year)` to `r max(penguins$year)` and contains information on bill length, bill depth, flipper length, body mass and sex of the penguins.
+
+The mean flipper length among the penguins in this data set is `r round(mean(penguins$flipper_length_mm, na.rm = TRUE, 2))` mm. 
+
+
+
+
